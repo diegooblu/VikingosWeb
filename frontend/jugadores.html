@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jugadores - Vikingos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Jugadores</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="calendario.html">Calendario</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Lista de Jugadores</h2>
+    <ul id="lista-jugadores"></ul>
+  </main>
+  <script>
+    // Obtener jugadores desde el backend
+    fetch('/api/jugadores')
+      .then(response => response.json())
+      .then(data => {
+        const lista = document.getElementById('lista-jugadores');
+        data.forEach(jugador => {
+          const li = document.createElement('li');
+          li.textContent = `${jugador.nombre} - Promedio: ${jugador.promedio} - Jonrones: ${jugador.jonrones}`;
+          lista.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario - Vikingos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Calendario</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="jugadores.html">Jugadores</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Próximos Juegos</h2>
+    <ul id="lista-calendario"></ul>
+  </main>
+  <script>
+    // Obtener calendario desde el backend
+    fetch('/api/calendario')
+      .then(response => response.json())
+      .then(data => {
+        const lista = document.getElementById('lista-calendario');
+        data.forEach(juego => {
+          const li = document.createElement('li');
+          li.textContent = `${juego.fecha} - Rival: ${juego.rival} - Resultado: ${juego.resultado}`;
+          lista.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
